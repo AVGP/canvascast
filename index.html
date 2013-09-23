@@ -1,0 +1,24 @@
+<!doctype html>
+<html data-cast-api-enabled="true">
+    <head>
+      <title>RemoteDOM Chromecast Example</title>
+      <style>
+        div[data-screen="remote"] { display: none; }
+      </style>
+    </head>
+    <body>
+        <h1>RemoteDOM Polyfill Chromecast demo</h1>
+        <div>This text is displayed on the primary device (e.g. a phone)</div>
+        <div data-screen="remote">
+            <h1>This text is displayed on the secondary device (e.g. a smart TV)</h1>
+        </div>
+        <button id="showImg">Show some image!</button>
+        <script src="index.js"></script>
+        <script>
+            document.getElementById("showImg").onclick = function() {
+                var img = new Image();
+                img.src = "http://www.nataliedee.com/062311/yay-everything-is-great.jpg";
+                document.querySelector("[data-screen]").appendChild(img);
+            };
+    </body>
+</html>
