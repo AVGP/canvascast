@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RemoteDOM receiver</title>
+  </head>
+  <body>
+    <div id="container">Waiting for sender...</div>
+    <script src="https://www.gstatic.com/cast/js/receiver/1.0/cast_receiver.js"></script>
+      var receiver = new cast.receiver.Receiver('THE_APP_ID', ['THE_NAMESPACE']),
+			channelHandler = new cast.receiver.ChannelHandler('THE_NAMESPACE');
+
+  		channelHandler.addChannelFactory(
+			receiver.createChannelFactory('THE_NAMESPACE'));
+
+  		receiver.start();
+  		
+  		channelHandler.addEventListener(cast.receiver.Channel.EventType.MESSAGE, function(message) {
+	  	  document.getElementById("container").innerHTML = message.message;
+		  });    
+  </body>
+</html>
