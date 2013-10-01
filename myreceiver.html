@@ -7,11 +7,11 @@
     <div id="container">Waiting for sender...</div>
     <script src="https://www.gstatic.com/cast/js/receiver/1.0/cast_receiver.js"></script>
     <script>
-      var receiver = new cast.receiver.Receiver('THE_APP_ID', ['THE_NAMESPACE']),
-			channelHandler = new cast.receiver.ChannelHandler('THE_NAMESPACE');
+      var receiver = new cast.receiver.Receiver('f5839d2f-c2c5-46c9-9b5e-f2e1fe6a1ebd', ['com.cw.remotedom.demo']),
+			channelHandler = new cast.receiver.ChannelHandler('com.cw.remotedom.demo');
 
   		channelHandler.addChannelFactory(
-			receiver.createChannelFactory('THE_NAMESPACE'));
+			receiver.createChannelFactory('com.cw.remotedom.demo'));
 
   		receiver.start();
   		
