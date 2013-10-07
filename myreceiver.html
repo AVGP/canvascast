@@ -7,17 +7,20 @@
     <div id="container">Waiting for sender...</div>
     <script src="https://www.gstatic.com/cast/js/receiver/1.0/cast_receiver.js"></script>
     <script>
-      var receiver = new cast.receiver.Receiver('f5839d2f-c2c5-46c9-9b5e-f2e1fe6a1ebd', ['com.cw.remotedom.demo']),
-			channelHandler = new cast.receiver.ChannelHandler('com.cw.remotedom.demo');
+      var receiver       = new cast.receiver.Receiver('f5839d2f-c2c5-46c9-9b5e-f2e1fe6a1ebd', ['remotedom', cast.receiver.RemoteMedia.NAMESPACE], '', 5),
+	  channelHandler = new cast.receiver.ChannelHandler('remotedom');
 
-  		channelHandler.addChannelFactory(
-			receiver.createChannelFactory('com.cw.remotedom.demo'));
+      channelHandler.addChannelFactory(receiver.createChannelFactory('remotedom'));
 
-  		receiver.start();
+      var remoteMedia = new cast.receiver.RemoteMedia();
+      remoteMedia.addChannelFactory(receiver.createChannelFactory(cast.receiver.RemoteMedia.NAMESPACE));
+
+      receiver.start();
   		
-  		channelHandler.addEventListener(cast.receiver.Channel.EventType.MESSAGE, function(message) {
-	  	  document.getElementById("container").innerHTML = message.message;
-		  });    
+      remoteMedia.addEventListener(cast.receiver.Channel.EventType.MESSAGE, function(message) {
+        console.log(message);
+	document.getElementById("container").innerHTML = message.message;
+      });    
     </script>
   </body>
 </html>
