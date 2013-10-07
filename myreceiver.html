@@ -19,12 +19,12 @@
   		
       channelHandler.addEventListener(cast.receiver.Channel.EventType.MESSAGE, function(message) {
         console.log(message);
-	document.getElementById("container").innerHTML = message.message;
+	document.getElementById("container").innerHTML = JSON.stringify(message.message);
       });    
       
       remoteMedia.onMessage = function(message) {
         console.log(message);
-	document.getElementById("container").innerHTML = message.message;
+	document.getElementById("container").innerHTML = JSON.stringify(message.message);
       };
     </script>
   </body>
