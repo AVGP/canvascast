@@ -2,30 +2,34 @@
 <html>
   <head>
     <title>RemoteDOM receiver</title>
+    <style>
+    	body { background-color: white; }
+    </style>
   </head>
   <body>
     <div id="container">Waiting for sender...</div>
     <script src="https://www.gstatic.com/cast/js/receiver/1.0/cast_receiver.js"></script>
     <script>
-      var receiver       = new cast.receiver.Receiver('f5839d2f-c2c5-46c9-9b5e-f2e1fe6a1ebd', ['remotedom', cast.receiver.RemoteMedia.NAMESPACE], '', 5),
+      var receiver       = new cast.receiver.Receiver('f5839d2f-c2c5-46c9-9b5e-f2e1fe6a1ebd', ['remotedom'], '', 5),
 	  channelHandler = new cast.receiver.ChannelHandler('remotedom');
 
       channelHandler.addChannelFactory(receiver.createChannelFactory('remotedom'));
-
+/*
       var remoteMedia = new cast.receiver.RemoteMedia();
       remoteMedia.addChannelFactory(receiver.createChannelFactory(cast.receiver.RemoteMedia.NAMESPACE));
-
+*/
       receiver.start();
   		
       channelHandler.addEventListener(cast.receiver.Channel.EventType.MESSAGE, function(message) {
         console.log(message);
-	document.getElementById("container").innerHTML = JSON.stringify(message.message);
+	document.getElementById("container").innerHTML = message.message;
       });    
-      
+/*      
       remoteMedia.onMessage = function(message) {
         console.log(message);
 	document.getElementById("container").innerHTML = JSON.stringify(message.message);
       };
+*/
     </script>
   </body>
 </html>
