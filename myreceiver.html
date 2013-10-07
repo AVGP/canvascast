@@ -17,10 +17,15 @@
 
       receiver.start();
   		
-      remoteMedia.addEventListener(cast.receiver.Channel.EventType.MESSAGE, function(message) {
+      channelHandler.addEventListener(cast.receiver.Channel.EventType.MESSAGE, function(message) {
         console.log(message);
 	document.getElementById("container").innerHTML = message.message;
       });    
+      
+      remoteMedia.onMessage = function(message) {
+        console.log(message);
+	document.getElementById("container").innerHTML = message.message;
+      };
     </script>
   </body>
 </html>
