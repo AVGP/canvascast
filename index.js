@@ -41,7 +41,8 @@ if (!chrome.cast || !chrome.cast.isAvailable) {
 var button = document.getElementById("startCast");
 button.addEventListener("click", function() {
   chrome.cast.requestSession(function success(session) {
-    console.log("Session!!");
+    window.session = session;
+    console.log("Session!!", session);
     session.sendMessage("urn:x-cast:de.geekonaut.remotedom", "Ohai!", function sent() {
       alert("Yay");
     }, function failed(e) {
