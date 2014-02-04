@@ -5,7 +5,8 @@ function receiverListener(e) {
 }
 
 function sessionListener(s) {
-  console.log("Session received", s); 
+  console.log("Session received", s);
+  window.session = s;
 }
 
 function onInitSuccess() {
@@ -39,7 +40,7 @@ if (!chrome.cast || !chrome.cast.isAvailable) {
 
 var remoteContainer = document.querySelector("div[data-screen=\"remote\"]");
 var observer = new MutationObserver(function() {
-  if(!session) return;
+  if(!window.session) return;
   window.session.sendMessage("urn:x-cast:de.geekonaut.remotedom", remoteContainer.innerHTML);
 });
 observer.observe(remoteContainer, {
@@ -53,7 +54,7 @@ button.addEventListener("click", function() {
   chrome.cast.requestSession(function success(session) {
     window.session = session;
     console.log("Session!!", session);
-    session.sendMessage("urn:x-cast:de.geekonaut.remotedom", "Ohai!", function sent() {
+    session.sendMessage("urn:x-cast:de.geekonaut.remotedom", remoteContainer.innerHTML, function sent() {
       alert("Yay");
     }, function failed(e) {
       console.log(e);
