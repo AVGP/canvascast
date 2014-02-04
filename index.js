@@ -1,12 +1,3 @@
-var cast_api, cv_activity;
-
-if (!chrome.cast || !chrome.cast.isAvailable) {
-  console.log("Deferred...");
-  setTimeout(initializeCastApi, 5000);
-} else {
-  initializeCastApi();
-}
-
 function receiverListener(e) {
   if( e === 'available' ) {
     console.log("Receiver available");
@@ -22,6 +13,7 @@ function onInitSuccess() {
 }
 
 function onError(err) {
+  console.log("Init err");
   alert("Shizzle - the initialization failed :(");
   console.log(err);
   
@@ -37,6 +29,14 @@ var initializeCastApi = function() {
   chrome.cast.initialize(apiConfig, onInitSuccess, onError);
   console.log("Waiting for init callbacks...");
 };
+
+if (!chrome.cast || !chrome.cast.isAvailable) {
+  console.log("Deferred...");
+  setTimeout(initializeCastApi, 1000);
+} else {
+  initializeCastApi();
+}
+
 
 var button = document.getElementById("startCast");
 button.addEventListener("click", function() {
