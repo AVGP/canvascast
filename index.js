@@ -1,7 +1,10 @@
 var cast_api, cv_activity;
 
 if (!chrome.cast || !chrome.cast.isAvailable) {
-  setTimeout(initializeCastApi, 1000);
+  console.log("Deferred...");
+  setTimeout(initializeCastApi, 5000);
+} else {
+  initializeCastApi();
 }
 
 function receiverListener(e) {
@@ -26,16 +29,19 @@ function onError(err) {
 }
 
 var initializeCastApi = function() {
+  console.log("Initialize...");
   var sessionRequest = new chrome.cast.SessionRequest("9A0FCE32");
   var apiConfig = new chrome.cast.ApiConfig(sessionRequest,
     sessionListener,
     receiverListener);
   chrome.cast.initialize(apiConfig, onInitSuccess, onError);
+  console.log("Waiting for init callbacks...");
 };
 
 var button = document.getElementById("startCast");
 button.addEventListener("click", function() {
   chrome.cast.requestSession(function success(session) {
+    console.log("Session!!");
     session.sendMessage("urn:x-cast:remotedom", "Ohai!", function sent() {
       alert("Yay");
     }, function failed() {
