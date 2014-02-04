@@ -42,7 +42,7 @@ var button = document.getElementById("startCast");
 button.addEventListener("click", function() {
   chrome.cast.requestSession(function success(session) {
     console.log("Session!!");
-    session.sendMessage("urn:x-cast:remotedom", "Ohai!", function sent() {
+    session.sendMessage("urn:x-cast:de.geekonaut.remotedom", "Ohai!", function sent() {
       alert("Yay");
     }, function failed() {
       alert("Oh no, can't talk to the Chrome Cast :(");
