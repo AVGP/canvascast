@@ -32,7 +32,7 @@ function onInitSuccess() {
   }, false);
 }
 
-function onError = function(err) {
+function onError(err) {
   alert("Shizzle - the initialization failed :(");
   console.log(err);
   
