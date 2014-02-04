@@ -44,7 +44,8 @@ button.addEventListener("click", function() {
     console.log("Session!!");
     session.sendMessage("urn:x-cast:de.geekonaut.remotedom", "Ohai!", function sent() {
       alert("Yay");
-    }, function failed() {
+    }, function failed(e) {
+      console.log(e);
       alert("Oh no, can't talk to the Chrome Cast :(");
     })
   }, function error(e) {
