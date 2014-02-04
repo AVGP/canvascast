@@ -37,6 +37,16 @@ if (!chrome.cast || !chrome.cast.isAvailable) {
   initializeCastApi();
 }
 
+var remoteContainer = document.querySelector("div[data-screen=\"remote\"]");
+var observer = new MutationObserver(function() {
+  if(!session) return;
+  window.session.sendMessage("urn:x-cast:de.geekonaut.remotedom", remoteContainer.innerHTML);
+});
+observer.observe(remoteContainer, {
+  attributes: true,
+  childList: true,
+  characterData: true
+});
 
 var button = document.getElementById("startCast");
 button.addEventListener("click", function() {
