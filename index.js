@@ -15,21 +15,7 @@ function sessionListener(s) {
 }
 
 function onInitSuccess() {
-  var button = document.getElementById("startCast");
-  button.style.backgroundColor = "green";
-  
-  button.addEventListener("click", function() {
-    chrome.cast.requestSession(function success(session) {
-      session.sendMessage("urn:x-cast:remotedom", "Ohai!", function sent() {
-        alert("Yay");
-      }, function failed() {
-        alert("Oh no, can't talk to the Chrome Cast :(");
-      })
-    }, function error(e) {
-      alert("Oh no, it didn't work :(");
-      console.log(e);
-    });
-  }, false);
+  console.log("Init successful.")
 }
 
 function onError(err) {
@@ -46,3 +32,17 @@ var initializeCastApi = function() {
     receiverListener);
   chrome.cast.initialize(apiConfig, onInitSuccess, onError);
 };
+
+var button = document.getElementById("startCast");
+button.addEventListener("click", function() {
+  chrome.cast.requestSession(function success(session) {
+    session.sendMessage("urn:x-cast:remotedom", "Ohai!", function sent() {
+      alert("Yay");
+    }, function failed() {
+      alert("Oh no, can't talk to the Chrome Cast :(");
+    })
+  }, function error(e) {
+    alert("Oh no, it didn't work :(");
+    console.log(e);
+  });
+}, false);
