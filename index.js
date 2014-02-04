@@ -22,7 +22,7 @@ function onError(err) {
 
 var initializeCastApi = function() {
   console.log("Initialize...");
-  var sessionRequest = new chrome.cast.SessionRequest("137C3100");
+  var sessionRequest = new chrome.cast.SessionRequest("9A0FCE32");
   var apiConfig = new chrome.cast.ApiConfig(sessionRequest,
     sessionListener,
     receiverListener);
