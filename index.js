@@ -1,32 +1,32 @@
 var cast_api, cv_activity;
 
-var initializeApi = function() {
-    console.log("Initializing API...");
-    
-    cast_api = new cast.Api();
-    cast_api.addReceiverListener("YouTube", function(list) {
-      console.log(list);
-    });    
-};
-
-var launchOn = function(receiver) {
-  var request = new cast.LaunchRequest("YouTube", receiver);
-  request.parameters = "v=sbQhgEJuExY";
-  request.description = new cast.LaunchDescription();
-  request.description.text = "Funsies!";
-  cast_api.launch(request, function(activity) { console.log(activity); });
-};
-
-if (window.cast && window.cast.isAvailable) {
-    // Cast is known to be available
-    initializeApi();
-} else {
-  // Wait for API to post a message to us
-  window.addEventListener("message", function(event) {
-    console.log("MSG", event);
-    if (event.source == window && event.data && 
-        event.data.source == "CastApi" &&
-        event.data.event == "Hello")
-      initializeApi();
-  });
+if (!chrome.cast || !chrome.cast.isAvailable) {
+  setTimeout(initializeCastApi, 1000);
 }
+
+function receiverListener(e) {
+  if( e === 'available' ) {
+    console.log("Receiver available");
+  }
+}
+
+var initializeCastApi = function() {
+  var sessionRequest = new chrome.cast.SessionRequest("9A0FCE32");
+  var apiConfig = new chrome.cast.ApiConfig(sessionRequest,
+    sessionListener,
+    receiverListener);
+  chrome.cast.initialize(apiConfig, onInitSuccess, onError);
+};
+
+document.getElementById("startCast").addEventListener("click", function() {
+  chrome.cast.requestSession(function success(session) {
+    session.sendMessage("urn:x-cast:remotedom", "Ohai!", function sent() {
+      alert("Yay");
+    }, function failed() {
+      alert("Oh no, can't talk to the Chrome Cast :(");
+    })
+  }, function error(e) {
+    alert("Oh no, it didn't work :(");
+    console.log(e);
+  });
+}, false);
