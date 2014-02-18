@@ -17,6 +17,8 @@
         <button id="showImg">Show some image!</button>
         <script src="index.js"></script>
         <script>
+            initRemoteDOM(document.getElementById("startCast"));
+        
             document.getElementById("showImg").onclick = function() {
                 var img = new Image();
                 img.src = "http://www.nataliedee.com/062311/yay-everything-is-great.jpg";
