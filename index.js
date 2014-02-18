@@ -2,6 +2,7 @@ function initRemoteDOM(castButton) {
   function receiverListener(e) {
     if( e === 'available' ) {
       console.log("Receiver available");
+      castButton.style.display = "inline";
     }
   }
   
@@ -12,7 +13,6 @@ function initRemoteDOM(castButton) {
   
   function onInitSuccess() {
     console.log("Init successful.");
-    castButton.style.display = "inline";
   }
   
   function onError(err) {
