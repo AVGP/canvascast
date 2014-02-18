@@ -3,23 +3,44 @@
   <head>
     <title>RemoteDOM receiver</title>
     <style>
-    	body { background-color: white; }
+    	body {
+    	    background-color: white;
+    	    margin: 1em;
+    	}
+    	#waiting {
+    	  font-size: 4em;
+    	  text-align: center;
+    	}
     </style>
   </head>
   <body>
+    <div id="waiting">Waiting...</div>
     <div id="container">Waiting for sender...</div>
     <script src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
     <script>
       window.onload = function() {
+        cast.receiver.logger.setLevelValue(0);
+
         window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
-        window.castReceiverManager.start();
-  		
-	var messageBus = window.castReceiverManager.getCastMessageBus('urn:x-cast:remotedom');
-	
-	messageBus.onMessage = function(message) {
+    	  var messageBus = window.castReceiverManager.getCastMessageBus('urn:x-cast:de.geekonaut.remotedom');
+
+  	    messageBus.onMessage = function(message) {
           console.log(message);
-  	  document.getElementById("container").innerHTML = message.message;
-        });
+  	      document.getElementById("container").innerHTML = message.data;
+        };
+
+        window.castReceiverManager.start();
+
+    		window.castReceiverManager.onReady = function(event) {
+          console.log('Received Ready event: ' + JSON.stringify(event.data));
+          window.castReceiverManager.setApplicationState("Application status is ready...");
+        };
+
+  	  	window.castReceiverManager.onSenderConnected = function(event) {
+  		    document.body.removeChild(document.getElementById("waiting"));
+          console.log('Received Sender Connected event: ' + event.data);
+          console.log(window.castReceiverManager.getSender(event.data).userAgent);
+        };
       };
     </script>
   </body>
