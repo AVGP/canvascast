@@ -15,6 +15,7 @@
             <style>
                 body {
                     background: #000;
+                    color: white;
                     margin: 1em;
                 }
                 #canvas_container {
@@ -32,9 +33,15 @@
             <h1>Swiss energy production 2000-2011</h1>
             <div id="canvas_container"></div>
         </div>
+        <style>
+            body {
+                background: white;
+                color: black;
+            }
+        </style>
         <div>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin posuere semper convallis. Aenean vel ultrices eros. Curabitur accumsan gravida tortor quis pulvinar. Suspendisse nulla tortor, lacinia ut lacinia eget, aliquet quis risus. Mauris facilisis leo enim. Cras gravida magna quis enim pulvinar dignissim. Nullam ac eleifend velit, vitae faucibus magna. Quisque elementum at ante quis hendrerit. Maecenas ac nibh in elit aliquet fermentum eget vitae risus. Proin nec sodales justo, vel mollis turpis. Nulla vel leo eu felis lacinia malesuada ut accumsan felis. Donec quis posuere eros. Nunc volutpat tincidunt arcu id dapibus.</p>
-            <p><button click="setJahr(2000)">See energy production 2000</button></p>
+            <p><button id="show2000">See energy production 2000</button></p>
             <p>Curabitur eu luctus tellus. Sed ipsum neque, consequat a quam id, sollicitudin fringilla leo. Mauris vulputate mollis dolor eget congue. Fusce sodales et libero sit amet fermentum. Morbi ullamcorper mollis pharetra. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean sagittis rutrum arcu sed interdum. Sed quis sodales enim. Nam porta odio sit amet dictum mollis. Integer a adipiscing lorem, et dapibus nibh. Aliquam sed mi in tortor luctus porta eu sed diam.</p>
             <p>Fusce non odio neque. Cras at neque vel lorem volutpat semper. Donec aliquet augue in tempor ornare. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum sit amet est blandit, pulvinar justo eget, dapibus velit. Sed ac lectus sed metus placerat hendrerit. In interdum pretium mauris a porttitor. Vivamus laoreet ornare sapien, id pulvinar eros euismod at. Mauris ut aliquam lorem. Aenean non pharetra lacus. Aliquam id euismod turpis, ut eleifend ante. Aenean lacinia est in volutpat posuere.</p>
             <p>Aenean lectus lacus, aliquet in porta eget, viverra eget sem. Morbi ac diam blandit, dapibus mi non, viverra justo. Aliquam scelerisque posuere ullamcorper. Vestibulum erat risus, blandit a nulla id, consequat commodo tortor. Donec id quam ac erat lacinia ullamcorper non vitae nisl. Nunc interdum, elit non tristique lacinia, urna urna varius mauris, nec dictum eros dolor sit amet libero. Praesent varius risus non tempor iaculis. Fusce eu quam eu ipsum cursus luctus at at nisi. Curabitur porttitor, tellus quis tincidunt tempus, magna dolor sagittis nulla, sit amet rhoncus libero ante vel eros. Duis imperdiet, massa eget vestibulum sodales, arcu orci tincidunt lectus, vel tempus mauris metus sed tortor. Suspendisse hendrerit auctor porttitor.</p>
@@ -46,12 +53,10 @@
         <script>
             initRemoteDOM(document.getElementById("startCast"));
         
-            document.getElementById("showImg").onclick = function() {
-                var img = new Image();
-                img.src = "http://www.nataliedee.com/062311/yay-everything-is-great.jpg";
-                document.querySelector("[data-screen]").appendChild(img);
-                console.log("Changed content");
-            };
+            document.getElementById("show2000").addEventListener("click", function() {
+                setJahr(2005);
+                document.querySelector("[data-screen] h1").innerHTML = "Energy production 2005";
+            });
         </script>
     </body>
 </html>
