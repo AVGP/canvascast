@@ -64,7 +64,8 @@ function initRemoteDOM(castButton) {
       //We have a session so stop it...
       window.session.stop();
       window.session = null;
-      castButton.textContent = "Connect Chromecast";
+      castButton.textContent = "Connect to Chromecast";
+      return;
     }
     
     chrome.cast.requestSession(function success(session) {
