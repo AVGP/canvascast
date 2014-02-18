@@ -46,7 +46,8 @@ function initRemoteDOM(castButton) {
   observer.observe(remoteContainer, {
     attributes: true,
     childList: true,
-    characterData: true
+    characterData: true,
+    subtree: true
   });
   
   
