@@ -61,7 +61,7 @@
             for(var i=0;i<years.length;i++) {
                 (function(year) {
                     document.getElementById("show" + year).addEventListener("click", function() {
-                        setJahr(years);
+                        setJahr(year);
                         document.querySelector("[data-screen] h1").innerHTML = "Energy production " + year;
                     });
                 })(years[i]);
