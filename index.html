@@ -1,21 +1,48 @@
 <!doctype html>
 <html data-cast-api-enabled="true">
     <head>
-      <title>RemoteDOM Chromecast Example</title>
+      <title>RemoteDOM Chromecast Example: Newspaper demo</title>
       <style>
         div[data-screen="remote"] { display: none; }
       </style>
-      <script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>      
+      <script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js" type="text/javascript"></script>
     </head>
     <body>
         <h1>RemoteDOM Polyfill Chromecast demo</h1>
         <p><button id="startCast">Connect to Chrome Cast</button></p>
-        <div>This text is displayed on the primary device (e.g. a phone)</div>
         <div data-screen="remote">
-            <h1>This text is displayed on the secondary device (e.g. a smart TV)</h1>
+            <style>
+                body {
+                    background: #000;
+                    margin: 1em;
+                }
+                #canvas_container {
+                    width: 500px;
+                    border: 1px solid #aaa;
+                    margin: 0px auto;
+                }
+    
+                h1 {
+                    color: #fff;
+                    font-family: Helvetica, Arial, sans-serif;
+                    text-align: center;
+                }
+            </style>        
+            <h1>Swiss energy production 2000-2011</h1>
+            <div id="canvas_container"></div>
         </div>
-        <button id="showImg">Show some image!</button>
+        <div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin posuere semper convallis. Aenean vel ultrices eros. Curabitur accumsan gravida tortor quis pulvinar. Suspendisse nulla tortor, lacinia ut lacinia eget, aliquet quis risus. Mauris facilisis leo enim. Cras gravida magna quis enim pulvinar dignissim. Nullam ac eleifend velit, vitae faucibus magna. Quisque elementum at ante quis hendrerit. Maecenas ac nibh in elit aliquet fermentum eget vitae risus. Proin nec sodales justo, vel mollis turpis. Nulla vel leo eu felis lacinia malesuada ut accumsan felis. Donec quis posuere eros. Nunc volutpat tincidunt arcu id dapibus.</p>
+            <p><button click="setJahr(2000)">See energy production 2000</button></p>
+            <p>Curabitur eu luctus tellus. Sed ipsum neque, consequat a quam id, sollicitudin fringilla leo. Mauris vulputate mollis dolor eget congue. Fusce sodales et libero sit amet fermentum. Morbi ullamcorper mollis pharetra. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean sagittis rutrum arcu sed interdum. Sed quis sodales enim. Nam porta odio sit amet dictum mollis. Integer a adipiscing lorem, et dapibus nibh. Aliquam sed mi in tortor luctus porta eu sed diam.</p>
+            <p>Fusce non odio neque. Cras at neque vel lorem volutpat semper. Donec aliquet augue in tempor ornare. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum sit amet est blandit, pulvinar justo eget, dapibus velit. Sed ac lectus sed metus placerat hendrerit. In interdum pretium mauris a porttitor. Vivamus laoreet ornare sapien, id pulvinar eros euismod at. Mauris ut aliquam lorem. Aenean non pharetra lacus. Aliquam id euismod turpis, ut eleifend ante. Aenean lacinia est in volutpat posuere.</p>
+            <p>Aenean lectus lacus, aliquet in porta eget, viverra eget sem. Morbi ac diam blandit, dapibus mi non, viverra justo. Aliquam scelerisque posuere ullamcorper. Vestibulum erat risus, blandit a nulla id, consequat commodo tortor. Donec id quam ac erat lacinia ullamcorper non vitae nisl. Nunc interdum, elit non tristique lacinia, urna urna varius mauris, nec dictum eros dolor sit amet libero. Praesent varius risus non tempor iaculis. Fusce eu quam eu ipsum cursus luctus at at nisi. Curabitur porttitor, tellus quis tincidunt tempus, magna dolor sagittis nulla, sit amet rhoncus libero ante vel eros. Duis imperdiet, massa eget vestibulum sodales, arcu orci tincidunt lectus, vel tempus mauris metus sed tortor. Suspendisse hendrerit auctor porttitor.</p>
+            <p>Duis ut metus nec enim tempor bibendum. Ut venenatis, turpis nec tincidunt lacinia, lacus odio volutpat urna, a tempor tellus tortor et urna. Suspendisse potenti. Duis cursus et sapien et cursus. Etiam commodo malesuada arcu eu semper. Ut a velit vitae quam viverra vestibulum. Pellentesque molestie dolor at posuere laoreet. In arcu velit, accumsan sed sollicitudin vitae, hendrerit vulputate ligula. Nam rutrum lacinia turpis, et dapibus elit faucibus sed. Nulla sed nibh nec orci malesuada venenatis non et neque. Nullam volutpat, enim ut fringilla placerat, purus justo hendrerit ligula, at vehicula massa enim a orci. Cras ut gravida mi. Aliquam lobortis auctor velit vitae adipiscing. Aliquam ullamcorper, nisi quis tincidunt eleifend, enim diam consequat dui, sit amet sodales tellus nisl sed tortor. Curabitur eu elit et tortor feugiat volutpat. Cras sodales, est tristique ullamcorper volutpat, purus felis tempus justo, a blandit nunc neque sed turpis.</p>
+        </div>
         <script src="index.js"></script>
+        <script src="visualization.js" type="text/javascript"></script>
+        
         <script>
             initRemoteDOM(document.getElementById("startCast"));
         
