@@ -1,0 +1,34 @@
+<!doctype html>
+<html data-cast-api-enabled="true">
+    <head>
+      <title>RemoteDOM Chromecast Example: Interactive</title>
+      <style>
+        div[data-screen="remote"] { display: none; }
+      </style>
+      <script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>      
+    </head>
+    <body>
+        <h1>RemoteDOM Polyfill Chromecast demo</h1>
+        <p><button id="startCast">Connect to Chrome Cast</button></p>
+        <div>This text is displayed on the primary device (e.g. a phone)</div>
+        <div data-screen="remote">
+            <h1>This text is displayed on the secondary device (e.g. a smart TV)</h1>
+        </div>
+        <div>
+            <p>In this example you can interact with the content on the secondary screen by clicking the following button:</p>
+            <p><button id="showImg">Show some image!</button></p>
+            <p>On each click, an image should appear on the external screen.</p>
+        </div>
+        <script src="index.js"></script>
+        <script>
+            initRemoteDOM(document.getElementById("startCast"));
+        
+            document.getElementById("showImg").onclick = function() {
+                var img = new Image();
+                img.src = "http://www.nataliedee.com/062311/yay-everything-is-great.jpg";
+                document.querySelector("[data-screen]").appendChild(img);
+                console.log("Changed content");
+            };
+        </script>
+    </body>
+</html>
