@@ -59,9 +59,11 @@
         
             var years = [2000, 2003, 2006, 2009, 2011];
             for(var i=0;i<years.length;i++) {
-                document.getElementById("show" + years[i]).addEventListener("click", function() {
-                    setJahr(years[i]);
-                    document.querySelector("[data-screen] h1").innerHTML = "Energy production " + years[i];
+                (function(year) {
+                    document.getElementById("show" + year).addEventListener("click", function() {
+                        setJahr(years);
+                        document.querySelector("[data-screen] h1").innerHTML = "Energy production " + year;
+                })(years[i]);
                 });
             }
         </script>
