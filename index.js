@@ -60,11 +60,19 @@ function initRemoteDOM(castButton) {
   }  
   
   castButton.addEventListener("click", function() {
+    if(window.session) {
+      //We have a session so stop it...
+      window.session.stop();
+      window.session = null;
+      castButton.textContent = "Connect Chromecast";
+    }
+    
     chrome.cast.requestSession(function success(session) {
       window.session = session;
       console.log("Session!!", session);
       session.sendMessage("urn:x-cast:de.geekonaut.remotedom", remoteContainer.innerHTML, function sent() {
         console.log("Casting...");
+        castButton.textContent = "Disconnect Chromecast";
       }, function failed(e) {
         console.log(e);
         alert("Oh no, can't talk to the Chrome Cast :(");
